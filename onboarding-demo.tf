@@ -24,7 +24,7 @@ resource "aws_instance" "terraform_dynamic_ami" {
     instance_type = var.AWS_INSTANCE_TYPE
 
     tags = {
-        # name = var.TAG_USER_NAME
-        # company = "HashiCorp"
+        name = var.TAG_USER_NAME
+        company = "HashiCorp"
     }
 }

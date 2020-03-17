@@ -12,8 +12,7 @@ variable "AWS_INSTANCE_TYPE" {
   type    = string
   default = "t2.nano"
 }
-/*
+
 variable "TAG_USER_NAME" {
   type = string
 }
-*/
