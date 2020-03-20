@@ -1,14 +1,13 @@
-provider "kubernetes" {
-
-}
-
-provider "helm" {
-
-}
+provider "kubernetes" {}
+provider "helm" {}
 
 resource "kubernetes_namespace" "tfc-operator" {
     metadata {
-        name = "tfc-operator"
+        name = var.TERRAFORM_K8S_NAMESPACE
+    }
+    provisioner "local-exec" {
+        when = destroy
+        command = "kubectl delete crd workspaces.app.terraform.io"
     }
 }
 
@@ -19,7 +18,7 @@ resource "kubernetes_secret" "tfc-api-token" {
     }
 
     data = {
-        credentials = file("/Users/philsautter/Code/tfc/tf-eco-k8s-vmw/credentials")
+        credentials = file(var.TFC_CREDENTIALS)
     }
 }
 
@@ -30,13 +29,13 @@ resource "kubernetes_secret" "workspace-secret" {
     }
 
     data = {
-        secret_key = "abc123"
+        AWS_ACCESS_KEY_ID = var.AWS_ACCESS_KEY_ID
+        AWS_SECRET_ACCESS_KEY = var.AWS_SECRET_ACCESS_KEY
     }
 }
 
 resource "helm_release" "tfc-operator-helm" {
-    name = "tfc-operator-release"
+    name = var.TERRAFORM_K8S_HELM_RELEASE
     namespace = kubernetes_namespace.tfc-operator.metadata[0].name
-    chart = "/Users/philsautter/Code/terraform-helm"
-    timeout = 1200
+    chart = var.TERRAFORM_K8S_HELM_CHART
 }
