@@ -8,7 +8,6 @@ variable "AWS_SECRET_ACCESS_KEY" {
 
 variable "TERRAFORM_K8S_NAMESPACE" {
   type    = string
-  default = "terraform-k8s-operator"
 }
 
 variable "TFC_CREDENTIALS" {
@@ -22,7 +21,7 @@ variable "TERRAFORM_K8S_HELM_CHART" {
 }
 
 variable "TERRAFORM_K8S_HELM_RELEASE" {
+  # Helm release name
   type    = string
-  default = "terraform-k8s-operator-release"
 }
 
