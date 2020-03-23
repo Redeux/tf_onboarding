@@ -41,3 +41,8 @@ resource "aws_instance" "terraform_dynamic_ami" {
         company = "HashiCorp"
     }
 }
+
+module "rds_example_complete-postgres" {
+  source  = "terraform-aws-modules/rds/aws//examples/complete-postgres"
+  version = "2.14.0"
+}
