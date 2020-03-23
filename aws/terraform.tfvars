@@ -1,0 +1,4 @@
+AWS_REGION = "us-east-2"
+INSTANCE_COUNT = 1
+AWS_INSTANCE_TYPE = "t2.nano"
+TAG_USER_NAME="psautter"
