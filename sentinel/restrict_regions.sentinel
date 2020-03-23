@@ -24,25 +24,21 @@ find_resources_from_plan = func(type) {
 
   # Iterate over all modules in the tfplan import
   for tfplan.module_paths as path {
-    print("path:\t", path)
+
     # Iterate over the named resources of desired type in the module
     for tfplan.module(path).resources[type] else {} as name, instances {
-      print("name:\t", name)
-      print("instances:\t", instances)
+
       # Iterate over resource instances
       for instances as index, r {
-        print("index:\t", index)
-        print("value:\t", r)
+
         # Get the address of the instance
         if length(path) == 0 {
           # root module
           address = type + "." + name + "[" + string(index) + "]"
-          print("root module:\t", address)
         } else {
           # non-root module
           address = "module." + strings.join(path, ".module.") + "." +
                     type + "." + name + "[" + string(index) + "]"
-          print("non-root module:\t", address)
         }
 
         # Add the instance to resources map, setting the key to the address
@@ -94,7 +90,6 @@ validate_attribute_in_list = func(type, attribute, allowed_values) {
         validated = false
       }
     }
-
   }
   return validated
 }
