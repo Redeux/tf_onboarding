@@ -68,7 +68,7 @@ validate_attribute_in_list = func(type, attribute, allowed_values) {
       # validated = false
     } else {
       # Validate that each instance has allowed value
-      print("attribute: ", r.applied[attribute])
+      print("attribute: ", strings.split(r.applied[attribute], ".")[0])
       if strings.split(r.applied[attribute], ".")[0] else "" not in allowed_values {
         print("Resource", address, "has attribute", attribute, "with value",
               r.applied[attribute] else "",
