@@ -1,3 +1,3 @@
-policy "restrict_regions" {
-    enforcement_level = "hard-mandatory"
+policy "restrict_ec2_instance_type" {
+    enforcement_level = "soft-mandatory"
 }
