@@ -68,10 +68,11 @@ validate_attribute_in_list = func(type, attribute, allowed_values) {
       # validated = false
     } else {
       # Validate that each instance has allowed value
-      print("attribute: ", strings.split(r.applied[attribute], ".")[0])
-      if strings.split(r.applied[attribute], ".")[0] else "" not in allowed_values {
+      instance_family = strings.split(r.applied[attribute], ".")[0]
+      print("instance_family: ", instance_family)
+      if instance_family else "" not in allowed_values {
         print("Resource", address, "has attribute", attribute, "with value",
-              r.applied[attribute] else "",
+              instance_family else "",
               "that is not in the allowed list:", allowed_values)
         validated = false
       }
@@ -85,7 +86,7 @@ validate_attribute_in_list = func(type, attribute, allowed_values) {
 
 # Allowed EC2 Instance Types
 # We don't include t2.nano or t2.micro to illustrate overriding failed policy
-allowed_types = [
+allowed_family = [
   "t2",
 ]
 
@@ -93,7 +94,7 @@ allowed_types = [
 
 # Call the validation function
 instances_validated = validate_attribute_in_list("aws_instance",
-                      "instance_type", allowed_types)
+                      "instance_type", allowed_family)
 
 # Main rule
 main = rule {
